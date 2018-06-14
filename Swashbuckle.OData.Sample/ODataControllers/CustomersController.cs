@@ -10,7 +10,8 @@ using SwashbuckleODataSample.Repositories;
 using System.Data.Entity;
 using Swashbuckle.Swagger.Annotations;
 using Swashbuckle.OData;
-using System.Web.OData.Routing;
+using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Routing;
 
 namespace SwashbuckleODataSample.ODataControllers
 {

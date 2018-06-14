@@ -3,16 +3,16 @@ using System.Net.Http;
 using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
-using System.Web.OData.Builder;
-using System.Web.OData.Extensions;
-using System.Web.OData.Routing;
-using System.Web.OData.Routing.Conventions;
+using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNet.OData.Routing.Conventions;
 using Microsoft.OData;
 using Microsoft.OData.Edm;
 using Microsoft.OData.UriParser;
-using Microsoft.Restier.Providers.EntityFramework;
-using Microsoft.Restier.Publishers.OData;
-using Microsoft.Restier.Publishers.OData.Batch;
+//using Microsoft.Restier.Providers.EntityFramework;
+//using Microsoft.Restier.Publishers.OData;
+//using Microsoft.Restier.Publishers.OData.Batch;
 using Swashbuckle.OData;
 using SwashbuckleODataSample.Models;
 using SwashbuckleODataSample.Repositories;
@@ -30,10 +30,12 @@ namespace SwashbuckleODataSample
             ConfigureRestierOData(config);
         }
 
-        private static async void ConfigureRestierOData(HttpConfiguration config)
+        private static void ConfigureRestierOData(HttpConfiguration config)
         {
             config.Filter().Expand().Select().OrderBy().MaxTop(null).Count();
+#if Restier
             await config.MapRestierRoute<EntityFrameworkApi<RestierODataContext>>("RESTierRoute", "restier", new RestierBatchHandler(GlobalConfiguration.DefaultServer));
+#endif
         }
 
         private static void ConfigureWebApiOData(HttpConfiguration config)
@@ -184,15 +186,15 @@ namespace SwashbuckleODataSample
             // Accepts multiple action parameters
             var createAction = productType.Collection.Action("Create");
                 createAction.ReturnsFromEntitySet<Product>("Products");
-                createAction.Parameter<string>("Name").OptionalParameter = false;
-                createAction.Parameter<double>("Price").OptionalParameter = false;
-                createAction.Parameter<MyEnum>("EnumValue").OptionalParameter = false;
+                createAction.Parameter<string>("Name").Nullable = false;
+                createAction.Parameter<double>("Price").Nullable = false;
+                createAction.Parameter<MyEnum>("EnumValue").Nullable = false;
 
             // An action bound to an entity set
             // Accepts an array of complex types
             var postArrayAction = productType.Collection.Action("PostArray");
             postArrayAction.ReturnsFromEntitySet<Product>("Products");
-            postArrayAction.CollectionParameter<ProductDto>("products").OptionalParameter = false;
+            postArrayAction.CollectionParameter<ProductDto>("products").Nullable = false;
 
             // An action bound to an entity
             productType.Action("Rate")
@@ -201,7 +203,7 @@ namespace SwashbuckleODataSample
             return builder.GetEdmModel();
         }
 
-        #region Enum Routes
+#region Enum Routes
         private static IEdmModel GetProductWithEnumKeyModel()
         {
             var builder = new ODataConventionModelBuilder();
@@ -222,6 +224,6 @@ namespace SwashbuckleODataSample
 
             return builder.GetEdmModel();
         }
-        #endregion
+#endregion
     }
 }

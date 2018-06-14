@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.OData;
-using System.Web.OData.Builder;
-using System.Web.OData.Extensions;
-using System.Web.OData.Routing.Conventions;
+using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNet.OData.Routing.Conventions;
 using FluentAssertions;
 using Microsoft.OData;
 using Microsoft.OData.Edm;
@@ -16,7 +16,7 @@ using NUnit.Framework;
 using Owin;
 using Swashbuckle.Swagger;
 using SwashbuckleODataSample.Models;
-
+using Microsoft.AspNet.OData;
 
 namespace Swashbuckle.OData.Tests
 {

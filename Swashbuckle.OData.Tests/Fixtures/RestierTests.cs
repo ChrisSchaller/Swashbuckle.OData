@@ -23,7 +23,7 @@ namespace Swashbuckle.OData.Tests
     [TestFixture]
     public class RestierTests
     {
-        [Test]
+        [Test, Ignore("Restier not supported")]
         public async Task It_supports_restier()
         {
             using (WebApp.Start(HttpClientUtils.BaseAddress, Configuration))
@@ -45,7 +45,7 @@ namespace Swashbuckle.OData.Tests
             }
         }
 
-        [Test]
+        [Test, Ignore("Restier not supported")]
         public async Task It_provides_unique_operation_ids_for_restier()
         {
             using (WebApp.Start(HttpClientUtils.BaseAddress, Configuration))
@@ -67,7 +67,7 @@ namespace Swashbuckle.OData.Tests
             }
         }
 
-        [Test]
+        [Test, Ignore("Restier not supported")]
         public async Task It_has_a_restier_get_with_all_optional_query_parameters()
         {
             using (WebApp.Start(HttpClientUtils.BaseAddress, Configuration))
@@ -87,7 +87,7 @@ namespace Swashbuckle.OData.Tests
             }
         }
 
-        [Test]
+        [Test, Ignore("Restier not supported")]
         public async Task It_has_a_restier_response_with_the_correct_edm_model_type()
         {
             using (WebApp.Start(HttpClientUtils.BaseAddress, Configuration))
@@ -109,7 +109,7 @@ namespace Swashbuckle.OData.Tests
             }
         }
 
-        [Test]
+        [Test, Ignore("Restier not supported")]
         public async Task It_groups_paths_by_entity_set()
         {
             using (WebApp.Start(HttpClientUtils.BaseAddress, Configuration))
@@ -129,7 +129,7 @@ namespace Swashbuckle.OData.Tests
             }
         }
 
-        [Test]
+        [Test, Ignore("Restier not supported")]
         public async Task It_has_a_restier_get_users_response_of_type_array()
         {
             using (WebApp.Start(HttpClientUtils.BaseAddress, Configuration))
@@ -160,7 +160,7 @@ namespace Swashbuckle.OData.Tests
             }
         }
 
-        [Test]
+        [Test, Ignore("Restier not supported")]
         public async Task It_supports_entities_with_multiple_keys()
         {
             using (WebApp.Start(HttpClientUtils.BaseAddress, NorthwindConfiguration))
@@ -182,7 +182,7 @@ namespace Swashbuckle.OData.Tests
             }
         }
 
-        [Test]
+        [Test, Ignore("Restier not supported")]
         public async Task It_supports_custom_swagger_routes_against_restier()
         {
             using (WebApp.Start(HttpClientUtils.BaseAddress, NorthwindConfiguration))
@@ -204,7 +204,7 @@ namespace Swashbuckle.OData.Tests
             }
         }
 
-        [Test]
+        [Test, Ignore("Restier not supported")]
         public async Task It_generates_valid_swagger_2_0_json_for_the_northwind_model()
         {
             using (WebApp.Start(HttpClientUtils.BaseAddress, NorthwindConfiguration))
@@ -218,7 +218,7 @@ namespace Swashbuckle.OData.Tests
         /// The TestWebApiStartup class is specified as a type parameter in the WebApp.Start method.
         /// </summary>
         /// <param name="appBuilder">The application builder.</param>
-        public async void NorthwindConfiguration(IAppBuilder appBuilder)
+        public void NorthwindConfiguration(IAppBuilder appBuilder)
         {
             var config = new HttpConfiguration
             {
@@ -248,18 +248,19 @@ namespace Swashbuckle.OData.Tests
             FormatterConfig.Register(config);
 
             config.Services.Replace(typeof(IHttpControllerSelector), new RestierControllerSelector(config));
-
+#if Restier
             var customSwaggerRoute = await config.MapRestierRoute<EntityFrameworkApi<NorthwindContext>>("RESTierRoute", "restier", new RestierBatchHandler(server));
+
 
             config.AddCustomSwaggerRoute(customSwaggerRoute, "/Customers({CustomerId})/Orders({OrderId})")
                 .Operation(HttpMethod.Get)
                 .PathParameter<string>("CustomerId")
                 .PathParameter<int>("OrderId");
-
+#endif
             config.EnsureInitialized();
         }
 
-        private static async void Configuration(IAppBuilder appBuilder)
+        private static void Configuration(IAppBuilder appBuilder)
         {
             var config = new HttpConfiguration
             {
@@ -284,8 +285,9 @@ namespace Swashbuckle.OData.Tests
             FormatterConfig.Register(config);
 
             config.Services.Replace(typeof(IHttpControllerSelector), new RestierControllerSelector(config));
-
+#if Restier
             await config.MapRestierRoute<EntityFrameworkApi<TestRestierODataContext>>("RESTierRoute", "restier", new RestierBatchHandler(server));
+#endif
 
             config.EnsureInitialized();
         }

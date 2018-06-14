@@ -5,14 +5,15 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using System.Web.OData;
-using System.Web.OData.Builder;
-using System.Web.OData.Extensions;
+using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Extensions;
 using FluentAssertions;
 using Microsoft.OData.Edm;
 using Microsoft.Owin.Hosting;
 using NUnit.Framework;
 using Owin;
 using Swashbuckle.Swagger;
+using Microsoft.AspNet.OData;
 
 namespace Swashbuckle.OData.Tests
 {

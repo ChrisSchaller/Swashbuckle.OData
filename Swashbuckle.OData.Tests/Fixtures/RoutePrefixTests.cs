@@ -3,16 +3,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.OData;
-using System.Web.OData.Builder;
-using System.Web.OData.Extensions;
-using System.Web.OData.Routing;
+using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Extensions;
 using FluentAssertions;
+using Microsoft.AspNet.OData.Routing;
 using Microsoft.OData.Edm;
 using Microsoft.Owin.Hosting;
 using NUnit.Framework;
 using Owin;
 using Swashbuckle.Swagger;
+using Microsoft.AspNet.OData;
 
 namespace Swashbuckle.OData.Tests
 {
