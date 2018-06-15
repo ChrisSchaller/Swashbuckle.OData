@@ -10,6 +10,22 @@ Swashbuckle.OData
 
 Extends Swashbuckle with OData v4 support! Supports both WebApi and OData controllers! 
 
+### This fork has been ported to the latest <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.OData/7.0.0-beta4">Microsoft.AspNet.OData v7.0.0-beta4</a> version ###
+
+This has been a quick & dirty port to the latest OData v7 beta (the version with all the breaking namespace 
+changes to support parallel net.core and netfx versions of Odata). 
+
+Use this fork if you're adopting the latest OData release and want Swagger documentation.
+
+All tests pass except for the RESTier test (which are skipped due to incompatibility)
+
+__Note:__ The following are not supported in this port:
+* RESTier (awaiting a version compatible with latest OData WebAPI) 
+* Use against OData.WebAPI version 6 and below - use the official repo instead
+* Use under ASP.NET Core (Untested - YMMV)
+* Code Contracts disabled - because VS2017
+* Nuproj Package deployment - Also because VS2017
+
 ### <a href="http://swashbuckleodata.azurewebsites.net/swagger/" target="_blank">Try it out!</a> ###
 
 ## Getting Started ##
