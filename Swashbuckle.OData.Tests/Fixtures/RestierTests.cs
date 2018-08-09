@@ -7,9 +7,11 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
 using FluentAssertions;
 using Microsoft.Owin.Hosting;
+#if Restier
 using Microsoft.Restier.Providers.EntityFramework;
 using Microsoft.Restier.Publishers.OData;
 using Microsoft.Restier.Publishers.OData.Batch;
+#endif
 using NorthwindAPI.Models;
 using NUnit.Framework;
 using Owin;
