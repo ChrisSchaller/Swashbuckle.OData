@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Swashbuckle.OData</id>
+    <version>4.0.0-private0002</version>
+    <authors>Richard Beauchamp and the Swashbuckle.OData contributors + Andy Ward</authors>
+    <owners>Richard Beauchamp</owners>
+    <licenseUrl>https://github.com/rbeauchamp/Swashbuckle.OData/blob/master/License.txt</licenseUrl>
+    <projectUrl>https://github.com/rbeauchamp/Swashbuckle.OData</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Extends Swashbuckle with OData v4 support! Supports both WebApi and OData controllers!</description>
+    <releaseNotes>Support for Microsoft.AspNet.OData v7.0.0-beta4</releaseNotes>
+    <copyright>Copyright © 2015 - 2017 Richard Beauchamp and the Swashbuckle.OData contributors</copyright>
+    <tags>Swashbuckle Swagger SwaggerUI OData Documentation Discovery Help WebApi AspNet AspNetWebApi Docs WebHost IIS</tags>
+    <dependencies>
+      <dependency id="Swashbuckle.Core" version="5.6.0" />
+    </dependencies>
+  </metadata>
+</package>
